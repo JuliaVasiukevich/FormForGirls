@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Анкета для подружек ✨</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script:wght@600&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- GLITTER CURSOR -->
+<div id="sparkle-container"></div>
+
+<!-- FLOATING HEARTS BG -->
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+  <div class="logo-area">
+    <div class="logo-title">✨ анКеТа ✨</div>
+    <div class="logo-sub">для самых клёвых подружек 💕</div>
+    <div class="pearl-divider">🔮💎🌸💎🔮</div>
+  </div>
+  <div class="home-card">
+    <div class="sticker-row">🐱 🎀 💅 🌸 ⭐ 🦋 💗</div>
+    <h2>Создай свою анкету!</h2>
+    <p>Заполни, украси, разошли подружкам — без регистрации! 🎉</p>
+    <button class="btn-main" onclick="showPage('page-create')">🎀 Создать анкету</button>
+
+    <!-- MY ANKETAS -->
+    <div id="myAnketasSection" style="display:none">
+      <div class="divider-hearts">💕 💕 💕</div>
+      <p style="font-size:13px;color:#c0608b;margin-bottom:10px">Твои анкеты:</p>
+      <div id="myAnketasList"></div>
+    </div>
+
+    <div class="divider-hearts">💕 💕 💕</div>
+    <p style="font-size:13px; color:#c0608b;">Заполнить анкету подруги или посмотреть ответы по ссылке:</p>
+    <div class="input-row">
+      <input type="text" id="linkInput" placeholder="вставь ссылку или id анкеты..." class="cute-input">
+      <button class="btn-secondary" onclick="openByLink()">→</button>
+    </div>
+    <div class="link-mode-btns">
+      <button class="link-mode-btn active" id="modeFill" onclick="setLinkMode('fill')">✏️ Заполнить</button>
+      <button class="link-mode-btn" id="modeResponses" onclick="setLinkMode('responses')">💌 Мои ответы</button>
+    </div>
+  </div>
+  <div class="cat-deco">🐱</div>
+</div>
+
+<!-- ===== CREATE PAGE ===== -->
+<div id="page-create" class="page">
+  <div class="page-header">
+    <button class="back-btn" id="wizardBackBtn" onclick="wizardBack()">← назад</button>
+    <h1>🎨 Создаём анкету</h1>
+  </div>
+
+  <!-- STEPPER -->
+  <div class="stepper">
+    <div class="step-item active" id="step-dot-1">
+      <div class="step-dot">1</div>
+      <div class="step-label">Основное</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item" id="step-dot-2">
+      <div class="step-dot">2</div>
+      <div class="step-label">Дизайн</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item" id="step-dot-3">
+      <div class="step-dot">3</div>
+      <div class="step-label">Вопросы</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-item" id="step-dot-4">
+      <div class="step-dot">4</div>
+      <div class="step-label">Готово!</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Basic info -->
+  <div class="wizard-step active" id="wizard-step-1">
+    <div class="create-container">
+      <div class="section-card">
+        <h3>🌸 Расскажи о себе</h3>
+        <label>Твоё имя <span class="required">*</span></label>
+        <input type="text" id="ownerName" placeholder="Как тебя зовут?" class="cute-input" maxlength="50">
+        <label style="margin-top:16px">Название анкеты</label>
+        <input type="text" id="anketaTitle" placeholder="Анкета Насти 💕" class="cute-input" maxlength="80">
+      </div>
+      <div class="wizard-nav">
+        <span></span>
+        <button class="btn-main" onclick="wizardNext(1)">Дальше →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Design -->
+  <div class="wizard-step" id="wizard-step-2">
+    <div class="create-container">
+      <div class="section-card">
+        <h3>💅 Оформление</h3>
+        <label>Фон</label>
+        <div class="bg-picker" id="bgPicker">
+          <div class="bg-option selected" data-bg="pink" style="background:linear-gradient(135deg,#ffb6d9,#ffd6eb)" title="Розовый"></div>
+          <div class="bg-option" data-bg="purple" style="background:linear-gradient(135deg,#d8b4fe,#f0abfc)" title="Фиолетовый"></div>
+          <div class="bg-option" data-bg="mint" style="background:linear-gradient(135deg,#a7f3d0,#d1fae5)" title="Мятный"></div>
+          <div class="bg-option" data-bg="blue" style="background:linear-gradient(135deg,#bae6fd,#dbeafe)" title="Голубой"></div>
+          <div class="bg-option" data-bg="peach" style="background:linear-gradient(135deg,#fed7aa,#fef3c7)" title="Персиковый"></div>
+          <div class="bg-option" data-bg="hearts" style="background:linear-gradient(135deg,#fecdd3,#fda4af)" title="Сердечки"></div>
+          <div class="bg-option" data-bg="stars" style="background:linear-gradient(135deg,#e9d5ff,#fef9c3)" title="Звёздочки"></div>
+          <div class="bg-option" data-bg="glitter" style="background:linear-gradient(135deg,#f9a8d4,#c084fc)" title="Блёстки"></div>
+        </div>
+        <label>Шрифт</label>
+        <div class="font-picker" id="fontPicker">
+          <div class="font-option selected" data-font="cursive" style="font-family:'Dancing Script',cursive">Рукописный</div>
+          <div class="font-option" data-font="pacifico" style="font-family:'Pacifico',cursive">Округлый</div>
+          <div class="font-option" data-font="caveat" style="font-family:'Caveat',cursive">Небрежный</div>
+        </div>
+      </div>
+      <div class="section-card">
+        <h3>🌟 Стикеры</h3>
+        <p class="hint">Нажми на стикер чтобы добавить его в анкету</p>
+        <div class="sticker-picker" id="stickerPicker">
+          🐱 🐰 🦋 🌸 🌺 🌻 🌈 ⭐ 💫 ✨ 🔮 💎 💍 👑 🎀 🎁 🍭 🍬 🍓 🍒 🧁 🍦 🌙 ☀️ 🦄 🐬 🦩 🌷 💅 👛 💄 🪞 🎵 🎶 💕 💗 💖 💝 🫶 🩷 🩰 🫧 🧸 🪄 🎠 🪅
+        </div>
+        <div class="selected-stickers" id="selectedStickers"></div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-secondary" onclick="wizardGo(1)">← Назад</button>
+        <button class="btn-main" onclick="wizardNext(2)">Дальше →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Questions -->
+  <div class="wizard-step" id="wizard-step-3">
+    <div class="create-container">
+      <div class="section-card">
+        <h3>❓ Вопросы <span class="required">*</span></h3>
+        <p class="hint">Выбери готовые или добавь свои</p>
+        <div class="preset-questions">
+          <span class="preset-q" onclick="addPreset(this)">Твоё имя</span>
+          <span class="preset-q" onclick="addPreset(this)">День рождения</span>
+          <span class="preset-q" onclick="addPreset(this)">Знак зодиака</span>
+          <span class="preset-q" onclick="addPreset(this)">Хобби</span>
+          <span class="preset-q" onclick="addPreset(this)">Любимый цвет</span>
+          <span class="preset-q" onclick="addPreset(this)">Любимый певец</span>
+          <span class="preset-q" onclick="addPreset(this)">Любимый фильм</span>
+          <span class="preset-q" onclick="addPreset(this)">Любимое блюдо</span>
+          <span class="preset-q" onclick="addPreset(this)">Твоя мечта</span>
+          <span class="preset-q" onclick="addPreset(this)">Как ты отдыхаешь</span>
+          <span class="preset-q" onclick="addPreset(this)">Любимое время года</span>
+          <span class="preset-q" onclick="addPreset(this)">Любимый цветок</span>
+          <span class="preset-q" onclick="addPreset(this)">Твои положительные черты</span>
+          <span class="preset-q" onclick="addPreset(this)">Что ты думаешь обо мне?</span>
+          <span class="preset-q" onclick="addPreset(this)">Твой секрет</span>
+          <span class="preset-q" onclick="addPreset(this)">Что любишь больше всего?</span>
+        </div>
+        <div id="questionsList" class="questions-list"></div>
+        <div class="add-q-row">
+          <input type="text" id="newQuestion" placeholder="Свой вопрос..." class="cute-input" maxlength="200">
+          <button class="btn-add" onclick="addQuestion()">+ Добавить</button>
+        </div>
+        <div id="questionsError" class="field-error" style="display:none">⚠️ Добавь хотя бы один вопрос!</div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-secondary" onclick="wizardGo(2)">← Назад</button>
+        <button class="btn-main" onclick="wizardNext(3)">Дальше →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Preview + Create -->
+  <div class="wizard-step" id="wizard-step-4">
+    <div class="create-container">
+      <div class="section-card">
+        <h3>👀 Предпросмотр</h3>
+        <div id="anketaPreview" class="anketa-preview"></div>
+      </div>
+      <div class="wizard-nav">
+        <button class="btn-secondary" onclick="wizardGo(3)">← Назад</button>
+        <button class="btn-main big" id="createBtn" onclick="createAnketa()">🎉 Создать анкету!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SHARE PAGE ===== -->
+<div id="page-share" class="page">
+  <div class="page-header">
+    <h1>🎉 Анкета готова!</h1>
+  </div>
+  <div class="share-card">
+    <div class="success-stickers">✨ 🎀 💕 🌸 ✨</div>
+    <h2 id="shareTitle"></h2>
+    <p>Скопируй ссылку и разошли подружкам!</p>
+    <div class="link-box">
+      <input type="text" id="shareLink" readonly class="link-input">
+      <button class="btn-copy" onclick="copyLink()">📋 Копировать</button>
+    </div>
+    <div id="copyMsg" class="copy-msg" style="display:none">✅ Скопировано!</div>
+    <div class="share-btns">
+      <button class="btn-secondary" onclick="viewResponses()">💌 Смотреть ответы</button>
+      <button class="btn-secondary" onclick="showPage('page-home')">🏠 На главную</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FILL PAGE (friend fills in) ===== -->
+<div id="page-fill" class="page">
+  <div id="fillContainer"></div>
+</div>
+
+<!-- ===== RESPONSES PAGE ===== -->
+<div id="page-responses" class="page">
+  <div class="page-header">
+    <button class="back-btn" onclick="goBackFromResponses()">← назад</button>
+    <h1>💌 Ответы подружек</h1>
+  </div>
+  <div id="responsesContainer"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
